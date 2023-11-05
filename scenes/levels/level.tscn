@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf55sf4vb0srq"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_sgppw"]
+[ext_resource type="PackedScene" uid="uid://bc8y6qxtbms3f" path="res://scenes/objects/gate.tscn" id="2_7pa07"]
+[ext_resource type="PackedScene" uid="uid://blqvfxrt5m8sg" path="res://scenes/players/player.tscn" id="2_smt6n"]
+
+[node name="Level" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_sgppw")
+
+[node name="Gate" parent="." instance=ExtResource("2_7pa07")]
+position = Vector2(526, -436)
+
+[node name="Player" parent="." instance=ExtResource("2_smt6n")]
+position = Vector2(549, 588)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[connection signal="grenade" from="Player" to="." method="_on_player_grenade"]
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
